@@ -1,3 +1,3 @@
 export default async ({ store }) => {
-  await store.dspatch("getFoodData");
+  await store.dispatch("getFoodData");
 };
