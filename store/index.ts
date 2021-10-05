@@ -1,21 +1,32 @@
+import { v4 as uuidv4 } from "uuid";
 export const state = () => ({
-  fooddata: []
+  fooddata: [],
+  cart: []
 });
 
-// export const getters = {
-//   getterValue: state => {
-//     return state.value
-//   }
-// }
+export const getters = {
+  totalPrice: state => {
+    if(!state.cart.length) return 0
+    return state.cart?.reduce((accumulator, next) => accumulator + +next.combinedPrice, 0) 
+  },
+
+  totalCount: state => {
+    return state.cart?.reduce((accumulator, next) => accumulator + +next.count, 0) 
+  }
+};
 
 export const mutations = {
   updateFoodData: (state, data) => {
     state.fooddata = data;
+  },
+  addToCart: (state, formOutput) => {
+    formOutput.id = uuidv4();
+    state.cart.push(formOutput);
   }
 };
 const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    "x-api-key": process.env.AWS_API_KEY || ''
+  "Content-Type": "application/json",
+  "x-api-key": process.env.AWS_API_KEY || ""
 };
 
 export const actions = {
