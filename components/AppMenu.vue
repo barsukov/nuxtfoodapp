@@ -6,7 +6,7 @@
         <nuxt-link to="/restaurants"> Restaurants </nuxt-link>
       </li>
     </ul>
-    <div class="smallnum">{{ totalCount }}</div>
+    <div class="smallnum" v-if="totalCount > 0">{{ totalCount }}</div>
     <nuxt-link to="/cart">Cart</nuxt-link>
   </nav>
 </template>
